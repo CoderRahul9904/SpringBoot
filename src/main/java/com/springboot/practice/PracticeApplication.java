@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 public class PracticeApplication implements CommandLineRunner {
 
 
-	private final RarozPaymentService paymentService;
+	private final PaymentService paymentService;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -18,7 +18,7 @@ public class PracticeApplication implements CommandLineRunner {
 		System.out.println("Payment Done");
 	}
 
-	public PracticeApplication(RarozPaymentService paymentService) {
+	public PracticeApplication(PaymentService paymentService) {
 		this.paymentService = paymentService;
 	}
 	public static void main(String[] args) {
