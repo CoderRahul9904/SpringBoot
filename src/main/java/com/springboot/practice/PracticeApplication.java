@@ -7,20 +7,20 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class PracticeApplication implements CommandLineRunner {
+public class PracticeApplication {
 
-
-	private final PaymentService paymentService;
-
-	@Override
-	public void run(String... args) throws Exception {
-		System.out.println(paymentService.pay());
-		System.out.println("Payment Done");
-	}
-
-	public PracticeApplication(PaymentService paymentService) {
-		this.paymentService = paymentService;
-	}
+//
+//	private final PaymentService paymentService;
+//
+//	@Override
+//	public void run(String... args) throws Exception {
+//		System.out.println(paymentService.pay());
+//		System.out.println("Payment Done");
+//	}
+//
+//	public PracticeApplication(PaymentService paymentService) {
+//		this.paymentService = paymentService;
+//	}
 	public static void main(String[] args) {
 		SpringApplication.run(PracticeApplication.class, args);
 	}
