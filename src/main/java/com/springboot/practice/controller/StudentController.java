@@ -2,11 +2,10 @@ package com.springboot.practice.controller;
 
 
 import com.springboot.practice.dto.StudentDto;
-import com.springboot.practice.entity.Student;
-import com.springboot.practice.repository.StudentRepository;
 import com.springboot.practice.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,13 +15,13 @@ import java.util.List;
 public class StudentController {
 
     private final StudentService studentService;
-    @GetMapping("/student")
-    public StudentDto getStudent(Integer sid){
-        return new StudentDto(1,"Rahul",21);
+    @GetMapping("/student/{sid}")
+    public StudentDto getStudentById(@PathVariable Integer sid){
+        return studentService.getStudentById(sid);
     }
 
     @GetMapping("/student-all")
-    public List<StudentDto> getAllStudent(Integer sid){
+    public List<StudentDto> getAllStudent(){
         return studentService.getAllStudents();
     }
 }
