@@ -7,6 +7,7 @@ import com.springboot.practice.repository.StudentRepository;
 import com.springboot.practice.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,13 +36,27 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public String deleteStudentById(int id) {
+    public ResponseEntity<Void> deleteStudentById(int id) {
         try{
-            studentRepository.deleteById(id);
-            return "Successfully deleted";
+            if(studentRepository.existsById(id)) {
+                studentRepository.deleteById(id);
+                return ResponseEntity.noContent().build();
+            }else{
+                throw new IllegalArgumentException("Student not found with Id: "+id);
+            }
         }catch (Exception e){
             e.printStackTrace();
-            return "Wrong SID";
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @Override
+    public StudentDto updateStudentById(StudentDto studentDto) {
+        if(studentRepository.existsById(studentDto.getSid())) {
+            Student student=modelMapper.map(studentDto, Student.class);
+            return modelMapper.map(studentRepository.save(student), StudentDto.class);
+        }else{
+            throw new IllegalArgumentException("Student not found with Id: "+studentDto.getSid());
         }
     }
 }
