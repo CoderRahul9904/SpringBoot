@@ -6,7 +6,6 @@ import com.springboot.practice.dto.StudentDto;
 import com.springboot.practice.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +31,17 @@ public class StudentController {
     }
 
     @DeleteMapping("/student/delete")
-    public ResponseEntity<String> deleteStudentById(@RequestParam Integer sid){
-        return ResponseEntity.status(HttpStatus.OK).body(studentService.deleteStudentById(sid));
+    public ResponseEntity<Void> deleteStudentById(@RequestParam Integer sid){
+        return studentService.deleteStudentById(sid);
     }
+
+    @PatchMapping("/update/student")
+    public ResponseEntity<StudentDto> updateStudentById(@RequestBody StudentDto studentDto){
+        return ResponseEntity.status(HttpStatus.OK).body(studentService.updateStudentById(studentDto));
+    }
+
+//    @PutMapping("/change/student")
+//    public ResponseEntity<StudentDto> changeStudentById(@RequestBody StudentDto studentDto){
+//        return ResponseEntity.status(HttpStatus.OK).body(studentService.updateStudentById(studentDto));
+//    }
 }
